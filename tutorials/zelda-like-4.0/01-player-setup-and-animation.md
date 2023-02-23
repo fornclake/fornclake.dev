@@ -44,7 +44,7 @@ The `input_direction` variable is going to be a Vector2 mapped to the arrow keys
 
 The `sprite_direction` will be a string of which direction the player is facing. I will explain more in the *Animation* section.
 
-The `sprite` onready variable is a reference to our AnimatedSprite2D node.
+The `sprite` onready variable is a reference to our *AnimatedSprite2D* node.
 
 #### Input Direction
 
