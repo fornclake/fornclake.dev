@@ -56,7 +56,7 @@ Do the same for `y`.
 
 We can now use these values in a Vector2. We normalize it so the player moves at the same speed diagonally. Finally we can return our `input_direction`.
 
-```
+```gdscript
 func _get_input_direction():
 	var x = -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right"))
 	var y = -int(Input.is_action_pressed("ui_up")) + int(Input.is_action_pressed("ui_down"))
