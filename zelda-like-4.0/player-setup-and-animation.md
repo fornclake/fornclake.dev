@@ -27,7 +27,7 @@ Now we are going to add a script for the player. Leave the template blank and sa
 
 First we'll add our variables.
 
-```python
+```
 extends CharacterBody2D
 
 const SPEED = 70
@@ -56,7 +56,7 @@ Do the same for `y`.
 
 We can now use these values in a Vector2. We normalize it so the player moves at the same speed diagonally. Finally we can return our `input_direction`.
 
-```python
+```
 func _get_input_direction():
 	var x = -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right"))
 	var y = -int(Input.is_action_pressed("ui_up")) + int(Input.is_action_pressed("ui_down"))
@@ -66,7 +66,7 @@ func _get_input_direction():
 
 We can add the *get* keyword to our `input_direction` definition and the function will update its value any time we ask for it.
 
-```python
+```
 var input_direction: get = _get_input_direction
 ```
 
@@ -74,7 +74,7 @@ var input_direction: get = _get_input_direction
 
 We have what we need to move the player now. Let's go back to `_physics_process` and make use of `input_direction`.
 
-```python
+```
 func _physics_process(_delta):
 	velocity = input_direction * SPEED
 	move_and_slide()
@@ -90,7 +90,7 @@ The last couple things we need to do is use the appropriate animation depending 
 
 We're going to create another getter function, this time for our `sprite_direction` variable. I am going to put it right under `_get_input_direction`.
 
-```python
+```
 func _get_sprite_direction():
 	match input_direction:
 		Vector2.LEFT:
@@ -108,7 +108,7 @@ Simple enough. If our `input_direction` is one of those four values it sets `spr
 
 Now let's define this as `sprite_direction`'s getter function.
 
-```python
+```
 var sprite_direction = "Down": get = _get_sprite_direction
 ```
 
@@ -116,7 +116,7 @@ var sprite_direction = "Down": get = _get_sprite_direction
 
 Let's create a function that accepts an animation parameter and will set the correct animation according to our `sprite_direction`.
 
-```python
+```
 func set_animation(animation):
 	var direction = "Side" if sprite_direction in ["Left", "Right"] else sprite_direction
 	sprite.play(animation + direction)
@@ -131,7 +131,7 @@ The final line flips our sprite if `sprite_direction` is "Left".
 
 Now we just need some criteria for it to play and stop.
 
-```python
+```
 if velocity:
 		set_animation("Walk")
 else:
