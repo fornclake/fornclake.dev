@@ -109,7 +109,7 @@ Simple enough. If our `input_direction` is one of those four values it sets `spr
 Now let's define this as `sprite_direction`'s getter function.
 
 ```gdscript
-var sprite_direction = "Down": get = _get_sprite_direction
+  var sprite_direction = "Down": get = _get_sprite_direction
 ```
 
 #### Animation
@@ -133,10 +133,10 @@ Now we just need some criteria for it to play and stop.
 
 ```gdscript
 if velocity:
-		set_animation("Walk")
+  set_animation("Walk")
 else:
-		set_animation("Walk")
-		sprite.stop()
+	set_animation("Walk")
+	sprite.stop()
 ```
 
 `if velocity:` returns true if the player is moving at all. We set our animation to "Walk" if so. Otherwise we do the same thing but stop the sprite. Any new animation set just needs to be set up the same way as "Walk" and it can make use of the `set_animation` function.
