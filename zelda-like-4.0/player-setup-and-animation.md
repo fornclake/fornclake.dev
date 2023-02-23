@@ -5,25 +5,25 @@ category: Zelda-like 4.0
 ## Scene setup
 #### CharacterBody2D and CollisionShape2D
 
-Our root node is going to be a CharacterBody2D. We will use this type for any object that can move and has collision.
+Our root node is going to be a *CharacterBody2D*. We will use this type for any object that can move and has collision.
 
 By default it's set to "Grounded" for platformers. Set it to "Floating" for top-down perspective movement.
 
-Add a CollisionShape2D as a child node. We will also give this a Capsule shape resource and set it to 5 px * 12 px. ###
+Add a *CollisionShape2D* as a child node. We will also give this a *CapsuleShape2D* resource and set it to 5 px * 12 px.
 
 #### AnimatedSprite2D
 
-The last node we'll add is an AnimatedSprite2D. Give it a new Spriteframes resource.
+The last node we'll add is an *AnimatedSprite2D*. Give it a new *SpriteFrames* resource.
 
-First we'll create a new WalkDown animation, add two frames, loop it, and set it to play at 10 FPS. Do the same for WalkSide and WalkUp.
+First we'll create a new "WalkDown" animation, add two frames, loop it, and set it to play at 10 FPS. Do the same for "WalkSide" and "WalkUp".
 
-I am using one WalkSide for left and right. We'll flip the sprite horizontally if the player is moving left.
+I am using one "WalkSide" for left and right. We'll flip the sprite horizontally if the player is moving left.
 
-Now we'll rename it "Player" and save the scene as player.tscn
+Now we'll rename it "Player" and save the scene as "player.tscn".
 
 ## Script
 
-Now we are going to add a script for the player. Leave the template blank and save it as "player.gd"
+Now we are going to add a script for the player. Leave the template blank and save it as "player.gd".
 
 First we'll add our variables.
 
@@ -64,7 +64,7 @@ func _get_input_direction():
 	return input_direction
 ```
 
-We can add the *get* keyword to our `input_direction` definition and the function will update its value any time we ask for it.
+We can add the `get` keyword to our `input_direction` definition and the function will update its value any time we ask for it.
 
 ```gdscript
 var input_direction: get = _get_input_direction
@@ -80,15 +80,15 @@ func _physics_process(_delta):
 	move_and_slide()
 ```
 
-Very simple. We are simply setting velocity to our `input_direction`, multiplying it by our `SPEED` constant, then moving the body.
+Very simple. We are simply setting the body's velocity to our `input_direction`, multiplying it by our `SPEED` constant, and finally moving it.
 
-We can run the scene now with F6 and the player will move with the arrow keys. Holding multiple directions should cancel out.
+We can run the scene now with F6 and the player will move with the arrow keys. Holding multiple directions should cancel each other out.
 
 #### Sprite Direction
 
-The last couple things we need to do is use the appropriate animation depending on the player's direction and start or stop the animation if the player is moving.
+The last couple things we need to do is set the appropriate animation depending on the player's direction and start or stop the animation if the player is moving.
 
-We're going to create another getter function, this time for our `sprite_direction` variable. I am going to put it right under `_get_input_direction`.
+We're going to create another getter function, this time for our `sprite_direction` variable. I am putting this right under `_get_input_direction`.
 
 ```gdscript
 func _get_sprite_direction():
