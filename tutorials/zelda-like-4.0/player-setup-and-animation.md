@@ -7,9 +7,9 @@ category: Zelda-like 4.0
 
 Our root node is going to be a *CharacterBody2D*. We will use this type for any object that can move and has collision.
 
-By default it's set to "Grounded" for platformers. Set it to "Floating" for top-down perspective movement.
+By default the *Motion Mode* is set to "Grounded" for platformers. Set it to "Floating" for top-down perspective movement.
 
-Add a *CollisionShape2D* as a child node. We will also give this a *CapsuleShape2D* resource and set it to 5 px * 12 px.
+Add a *CollisionShape2D* as a child node. We will give it a *CapsuleShape2D* resource and set the *Radius* and *Height* to 5 px and 12 px.
 
 #### AnimatedSprite2D
 
@@ -38,7 +38,7 @@ var sprite_direction
 @onready var sprite = $AnimatedSprite2D
 ```
 
-Our `SPEED` constant will be how many pixels per second the player will use.
+Our `SPEED` constant will be how many pixels per second the player will move.
 
 The `input_direction` variable is going to be a Vector2 mapped to the arrow keys. We will complete this one in a moment.
 
@@ -50,11 +50,11 @@ The `sprite` onready variable is a reference to our *AnimatedSprite2D* node.
 
 Let's create a getter function for `input_direction`. It is going to check for keyboard inputs and return a Vector2.
 
-We'll take the combined presses of "ui_left" and "ui_right" and turn it into a local `x` variable. If the left arrow key is pressed `x` will equal -1, if right is pressed it's 1. They are added together so if both are pressed it cancels to 0.
+We'll take the combined presses of "ui_left" and "ui_right" and turn it into a local `x` variable. If the left arrow key is pressed `x` will equal -1, if right is pressed it will be 1. They are added together so if both are pressed it cancels to 0.
 
 Do the same for `y`.
 
-We can now use these values in a Vector2. We normalize it so the player moves at the same speed diagonally. Finally we can return our `input_direction`.
+We can now use these values in a Vector2. We normalize it so the player moves at the same speed diagonally. Finally we return our `input_direction`.
 
 ```gdscript
 func _get_input_direction():
@@ -80,7 +80,7 @@ func _physics_process(_delta):
 	move_and_slide()
 ```
 
-Very simple. We are simply setting the body's velocity to our `input_direction`, multiplying it by our `SPEED` constant, and finally moving it.
+Very simple. We are simply setting the body's velocity to our `input_direction`, multiplying it by our `SPEED` constant, and finally moving it. We don't even have to call the function in `_physics_process`; it is called implicitly through the getter declaration.
 
 We can run the scene now with F6 and the player will move with the arrow keys. Holding multiple directions should cancel each other out.
 
