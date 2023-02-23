@@ -1,4 +1,4 @@
 ---
-title: Dev Log Index
+title: Dev Log
 ---
 ## Dev Log
