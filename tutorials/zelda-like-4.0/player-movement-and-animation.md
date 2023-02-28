@@ -28,13 +28,19 @@ Add a *CollisionShape2D* as a child node. We will give it a *CapsuleShape2D* res
 
 #### AnimatedSprite2D
 
-The last node we'll add is an *AnimatedSprite2D*. Give it a new *SpriteFrames* resource.
+The last node we'll add is an *AnimatedSprite2D*. Expand the *Animation* tab in the inspector and give it a new *SpriteFrames* resource.
+
+Download this image and save it as "res://player/player.png".
 
 ![Player sprite sheet](/_images/zelda-like-1_player_spritesheet.png "Player sprite sheet")
 
-First we'll create a new "WalkDown" animation, add two frames, loop it, and set it to play at 10 FPS. Do the same for "WalkSide" and "WalkUp".
+Rename the "default" animation to "WalkDown". Set the FPS to 10. Press the button labeled *Add frames from sprite sheet (Ctrl+Shift+O)* and select the player sprite sheet file. Set *Horizontal* and *Vertical* to 6 and 6. Press *Add 2 Frame(s)*.
 
-I am using one "WalkSide" for left and right. We'll flip the sprite horizontally if the player is moving left.
+[!Add frames](/_images/zelda-like-1_select_frames.png "Add frames")
+
+Follow the same steps for the "WalkSide" and "WalkUp" animations. I am using one "WalkSide" for left and right. We'll flip the sprite horizontally if the player is moving left.
+
+[!Animated sprite](/_images/zelda-like-1_animated_sprite.png "Animated sprite")
 
 ## Script
 
