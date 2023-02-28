@@ -8,6 +8,8 @@ category: Zelda-like 4.0
 
 First let's do some quick project setup. Since we'll be using 2D pixel art, we need to turn off the linear filtering on sprites. In **General>Rendering>Textures**, set the default texture filter from "Linear" to "Nearest".
 
+![Project settings](/_images/zelda-like-1_project_settings.png "Project Settings")
+
 Now let's create an empty scene with a camera. The root will be a *Node2D* that we will name "Main". Add a *Camera2D* node and set its *Zoom* parameters to 4.
 
 ## Player Scene
