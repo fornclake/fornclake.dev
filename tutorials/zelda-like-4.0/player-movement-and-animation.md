@@ -6,7 +6,7 @@ category: Zelda-like 4.0
 
 #### Project Setup
 
-First let's do some quick project setup. Since we'll be using 2D pixel art, we need to turn off the linear filtering on sprites. In **General>Rendering>Textures**, set the default texture filter from "Linear" to "Nearest".
+First let's do some quick project setup. Since we'll be using 2D pixel art, we need to turn off the linear filtering on sprites. Set *General>Rendering>Textures>Canvas Textures>Default Texture Filter* from "Linear" to "Nearest".
 
 ![Filter](/_images/zelda-like-1_filter.png "Filter")
 
@@ -67,13 +67,13 @@ var sprite_direction
 
 #### Input Direction
 
-Create a getter function for `input_direction`. It will check for keyboard inputs and return a Vector2. Name it `_get_input_direction`.
+Create a [getter](https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#properties-setters-and-getters) function for `input_direction`. It will check for keyboard inputs and return a Vector2. Name it `_get_input_direction`.
 
-Let's create a local `x` variable that will be set to the combined presses of "ui_left" and "ui_right". We convert them from bool to int and negate "ui_left". If the left arrow key is pressed `x` will be -1, if right is pressed it will be 1. They are added together so if both keys are pressed `x` cancels to 0.
+Let's create a local `x` variable that will be set to the combined presses of "ui_left" and "ui_right". We convert them from bool to int and negate "ui_left". If the left arrow key is pressed `x` will be -1, if right is pressed it will be 1. The ints are added together so if both keys are pressed `x` cancels to 0.
 
 Do the same with a new `y` variable using "ui_up" and "ui_down".
 
-Set `input_direction` to a normalized Vector2 composed of `x` and `y`. Return `input_direction`.
+Set `input_direction` to a normalized Vector2 composed of `x` and `y` then return it.
 
 ```gdscript
 func _get_input_direction():
@@ -83,7 +83,7 @@ func _get_input_direction():
 	return input_direction
 ```
 
-Add the `get` keyword to our `input_direction` definition and the function will automatically update its value when we ask for it.
+Add the `get` keyword to our `input_direction` declaration and the function will automatically update its value when we ask for it.
 
 ```gdscript
 var input_direction: get = _get_input_direction
@@ -122,7 +122,7 @@ func _get_sprite_direction():
 	return sprite_direction
 ```
 
-Define this as `sprite_direction`'s getter function.
+Define this as `sprite_direction`'s getter function. Set its default value to "Down".
 
 ```gdscript
 var input_direction: get = _get_input_direction
