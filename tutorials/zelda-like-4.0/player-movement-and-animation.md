@@ -40,7 +40,7 @@ Rename the "default" animation to "WalkDown". Set the FPS to 10. Press the butto
 
 Follow the same steps for the "WalkSide" and "WalkUp" animations. We will use "WalkSide" for both left and right. We'll flip the sprite horizontally when the player is moving left. Select "WalkDown" before moving on to set it as the default animation.
 
-![Animated sprite](/_images/zelda-like-1_animated_sprite.png "Animated sprite")
+![Sprite frames](/_images/zelda-like-1_sprite_frames.png "Sprite frames")
 
 ## Script
 
@@ -135,7 +135,7 @@ var sprite_direction = "Down": get = _get_sprite_direction
 
 Create a `set_animation` function that accepts an `animation` parameter. This will take an animation set such as "Walk" or later "Push" or "Carry" and play the correct animation depending on the player's direction.
 
-Create a `direction` variable and set it to "Side" if `sprite_direction` is either "Left" or "Right". If it is "Up" or "Down" then `direction` can be the same. We use a [ternary-if expression]((https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif) to accomplish this in a single line.
+Create a `direction` variable and set it to "Side" if `sprite_direction` is either "Left" or "Right". If it is "Up" or "Down" then `direction` can be the same. We use a [ternary-if expression](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif) to accomplish this in a single line.
 
 Next have our `sprite` node play `animation + direction`. We can use the `+` operator on two strings to concatenate them. If the up arrow key is being pressed it will play "WalkUp".
 
@@ -148,14 +148,16 @@ func set_animation(animation):
 	sprite.flip_h = (sprite_direction == "Left")
 ```
 
-Now we just need some criteria for the sprite to play or stop. When `velocity` is true (i.e. not equal to (0,0)) we will set the animation to "Walk". Otherwise, we'll do the same and also stop the sprite.
+We'll set the animation to "Walk" and stop the sprite if the player isn't moving.
 
 ```gdscript
-  if velocity:
-    set_animation("Walk")
-  else:
-	  set_animation("Walk")
-	  sprite.stop()
+func _physics_process(_delta):
+	velocity = input_direction * SPEED
+	move_and_slide()
+	
+	set_animation("Walk")
+	if velocity == Vector2.ZERO:
+		sprite.stop()
 ```
 
 ## Conclusion
@@ -177,10 +179,8 @@ func _physics_process(_delta):
 	velocity = input_direction * SPEED
 	move_and_slide()
 	
-	if velocity:
-		set_animation("Walk")
-	else:
-		set_animation("Walk")
+	set_animation("Walk")
+	if velocity == Vector2.ZERO:
 		sprite.stop()
 
 
