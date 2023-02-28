@@ -38,7 +38,7 @@ Rename the "default" animation to "WalkDown". Set the FPS to 10. Press the butto
 
 ![Select frames](/_images/zelda-like-1_select_frames.png "Select frames")
 
-Follow the same steps for the "WalkSide" and "WalkUp" animations. I am using one "WalkSide" for left and right. We'll flip the sprite horizontally if the player is moving left.
+Follow the same steps for the "WalkSide" and "WalkUp" animations. We will use "WalkSide" for both left and right. We'll flip the sprite horizontally when the player is moving left. Select "WalkDown" before moving on to set it as the default animation.
 
 ![Animated sprite](/_images/zelda-like-1_animated_sprite.png "Animated sprite")
 
@@ -61,21 +61,21 @@ var sprite_direction
 
 Our `SPEED` constant will be how many pixels per second the player will move.
 
-The `input_direction` variable is going to be a Vector2 mapped to the arrow keys. We will complete this one in a moment.
+The `input_direction` variable is going to be a Vector2 mapped to the arrow keys.
 
-The `sprite_direction` will be a string of which direction the player is facing. I will explain more in the *Animation* section.
+The `sprite_direction` will be a string of which direction the player is facing.
 
 The `sprite` onready variable is a reference to our *AnimatedSprite2D* node.
 
 #### Input Direction
 
-Let's create a getter function for `input_direction`. It is going to check for keyboard inputs and return a Vector2.
+Let's create a getter function for `input_direction`. It is going to check for keyboard inputs and return a Vector2. Name it `_get_input_direction`.
 
-We'll take the combined presses of "ui_left" and "ui_right" and turn it into a local `x` variable. If the left arrow key is pressed `x` will equal -1, if right is pressed it will be 1. They are added together so if both are pressed it cancels to 0.
+Let's create a local `x` variable and set it to the combined presses of "ui_left" and "ui_right". We will convert them from bool to int and negate "ui_left". If the left arrow key is pressed `x` will be -1, if right is pressed it will be 1. They are then added together; if both keys are pressed `x` cancels to 0.
 
-Do the same for `y`.
+Do the same with a new `y` variable and use "ui_up" and "ui_down".
 
-We can now use these values in a Vector2. We normalize it so the player moves at the same speed diagonally. Finally we return our `input_direction`.
+Set `input_direction` to a normalized Vector2 composed of `x` and `y`. Finally we will return `input_direction`.
 
 ```gdscript
 func _get_input_direction():
@@ -85,15 +85,16 @@ func _get_input_direction():
 	return input_direction
 ```
 
-We can add the `get` keyword to our `input_direction` definition and the function will update its value any time we ask for it.
+Add the `get` keyword to our `input_direction` definition and the function will update its value any time we ask for it.
 
 ```gdscript
 var input_direction: get = _get_input_direction
+var sprite_direction
 ```
 
 #### Movement
 
-We have what we need to move the player now. Let's go back to `_physics_process` and make use of `input_direction`.
+We have what we need to move the body now. Let's create the `_physics_process` above our other function and make use of `input_direction`. Set `velocity` to `input_direction * SPEED` and call `move_and_slide`. `velocity` is a built-in property of *CharacterBody2D* that is automatically used and updated when the node moves.
 
 ```gdscript
 func _physics_process(_delta):
@@ -101,15 +102,13 @@ func _physics_process(_delta):
 	move_and_slide()
 ```
 
-We are simply setting the body's velocity to our `input_direction`, multiplying it by our `SPEED` constant, and finally moving it. We don't even have to call the function in `_physics_process`; it is called implicitly through the getter declaration.
-
-Add the player to the main scene we created earlier. We can run the scene now with F5 and the player will move with the arrow keys. Holding multiple directions should cancel each other out.
+Add an instance of our player scene to the main scene we created earlier. We can run the scene now with F5 and the player will move with the arrow keys. Holding multiple directions should cancel each other out.
 
 #### Sprite Direction
 
-The last couple things we need to do is set the appropriate animation depending on the player's direction and start or stop the animation if the player is moving.
+Now we need to set the appropriate animation depending on the player's direction and start or stop the animation if the player is moving.
 
-We're going to create another getter function, this time for our `sprite_direction` variable. I am putting this right under `_get_input_direction`.
+We're going to create another getter function, this time for our `sprite_direction` variable. I am putting this right under `_get_input_direction`. We'll use a match statement that will take an orthogonal direction and set `sprite_direction` to a corresponding string before returning it.
 
 ```gdscript
 func _get_sprite_direction():
@@ -125,17 +124,22 @@ func _get_sprite_direction():
 	return sprite_direction
 ```
 
-Simple enough. If our `input_direction` is one of those four values it sets `sprite_direction` and returns it. It will not do anything special if the player is moving diagonally or is still.
-
 Now let's define this as `sprite_direction`'s getter function.
 
 ```gdscript
-  var sprite_direction = "Down": get = _get_sprite_direction
+var input_direction: get = _get_input_direction
+var sprite_direction = "Down": get = _get_sprite_direction
 ```
 
 #### Animation
 
-Let's create a function that accepts an animation parameter and will set the correct animation according to our `sprite_direction`.
+Create a `set_animation` function that accepts an `animation` parameter. This will take an animation set such as "Walk" or later "Push" or "Carry" and play the correct animation depending on the player's direction.
+
+Create a `direction` variable and set it to "Side" if `sprite_direction` is either "Left" or "Right". If it is "Up" or "Down" then `direction` can be the same. We use a [ternary-if expression]((https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#if-else-elif) to accomplish this in a single line.
+
+Next have our `sprite` node play `animation + direction`. We can use the `+` operator on two strings to concatenate them. If the up arrow key is being pressed it will play "WalkUp".
+
+Finally we will set the `flip_h` property in `sprite` to the expression `sprite_direction == "Left"`.
 
 ```gdscript
 func set_animation(animation):
@@ -144,13 +148,7 @@ func set_animation(animation):
 	sprite.flip_h = (sprite_direction == "Left")
 ```
 
-The first line of the function's body defines a new direction variable. If `sprite_direction` is either "Left" or "Right" it will set `direction` to "Side". If it is "Up" or "Down" it can remain the same.
-
-The second line plays the animation. It takes our `animation` parameter and concatenates it with our new `direction` variable. If we are, say, pressing up to walk, it will play "WalkUp".
-
-The final line flips our sprite if `sprite_direction` is "Left".
-
-Now we just need some criteria for it to play and stop.
+Now we just need some criteria for the sprite to play or stop. When `velocity` is true (i.e. not equal to (0,0)) we will set the animation to "Walk". Otherwise, we'll do the same and also stop the sprite.
 
 ```gdscript
   if velocity:
@@ -159,10 +157,6 @@ Now we just need some criteria for it to play and stop.
 	  set_animation("Walk")
 	  sprite.stop()
 ```
-
-`if velocity:` returns true if the player is moving at all. We set our animation to "Walk" if so. Otherwise we do the same thing but stop the sprite. Any new animation set just needs to be set up the same way as "Walk" and it can make use of the `set_animation` function.
-
-We can try out the scene now. The player can move in 8 directions and will only change animation when moving orthogonally.
 
 ## Conclusion
 
