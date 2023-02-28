@@ -4,19 +4,17 @@ category: Zelda-like 4.0
 ---
 ## Introduction
 
-googoo gaga
-
-## Project Setup
+#### Project Setup
 
 First let's do some quick project setup. Since we'll be using 2D pixel art, we need to turn off the linear filtering on sprites. In **General>Rendering>Textures**, set the default texture filter from "Linear" to "Nearest".
 
-
+Now let's create an empty scene with a camera. The root will be a *Node2D* that we will name "Main". Add a *Camera2D* node and set its *Zoom* parameters to 4.
 
 ## Player Scene
 
 #### CharacterBody2D and CollisionShape2D
 
-Our root node is going to be a *CharacterBody2D*. We will use this type for any object that can move and has collision.
+Create a new scene. Our root node is going to be a *CharacterBody2D*. We will use this type for any object that can move and has collision. Name the root "Player" and save the scene as "res://player/player.tscn".
 
 By default the *Motion Mode* is set to "Grounded" for platformers. Set it to "Floating" for top-down perspective movement.
 
@@ -26,15 +24,15 @@ Add a *CollisionShape2D* as a child node. We will give it a *CapsuleShape2D* res
 
 The last node we'll add is an *AnimatedSprite2D*. Give it a new *SpriteFrames* resource.
 
+![Player sprite sheet](/_images/zelda-like-1_player_spritesheet.png "Player sprite sheet")
+
 First we'll create a new "WalkDown" animation, add two frames, loop it, and set it to play at 10 FPS. Do the same for "WalkSide" and "WalkUp".
 
 I am using one "WalkSide" for left and right. We'll flip the sprite horizontally if the player is moving left.
 
-Now we'll rename it "Player" and save the scene as "player.tscn".
-
 ## Script
 
-Now we are going to add a script for the player. Leave the template blank and save it as "player.gd".
+Now we are going to add a script for the player. Leave the template blank and save it as "player.gd" in its default directory.
 
 First we'll add our variables.
 
@@ -91,9 +89,9 @@ func _physics_process(_delta):
 	move_and_slide()
 ```
 
-Very simple. We are simply setting the body's velocity to our `input_direction`, multiplying it by our `SPEED` constant, and finally moving it. We don't even have to call the function in `_physics_process`; it is called implicitly through the getter declaration.
+We are simply setting the body's velocity to our `input_direction`, multiplying it by our `SPEED` constant, and finally moving it. We don't even have to call the function in `_physics_process`; it is called implicitly through the getter declaration.
 
-We can run the scene now with F6 and the player will move with the arrow keys. Holding multiple directions should cancel each other out.
+Add the player to the main scene we created earlier. We can run the scene now with F5 and the player will move with the arrow keys. Holding multiple directions should cancel each other out.
 
 #### Sprite Direction
 
