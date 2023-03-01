@@ -1,5 +1,5 @@
 ---
-title: Player Movement and Animation
+title: Zelda-like Tutorial for Godot 4.0 - Player Movement and Animation
 category: Zelda-like 4.0
 ---
 ## Introduction
