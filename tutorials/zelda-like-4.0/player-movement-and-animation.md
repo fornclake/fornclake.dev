@@ -8,9 +8,9 @@ Hello! This is the first installment of my Zelda-like tutorial series for Godot 
 
 ![Example](/_images/zelda-like-1_example.png "Example")
 
-There will be a mix of standalone tutorials that cover single features and multiple-part tutorials for larger features. All installments will be released first as written guides, then uploaded as videos to my YouTube channel shortly after.
+There will be a mix of standalone tutorials that cover single features and multiple-part tutorials for larger features. All installments will be released first as written guides, then uploaded as videos to my [YouTube channel](https://www.youtube.com/c/fornclake) shortly after.
 
-I will be using Gameboy-inspired graphics drawn by TheRetroDragon. All assets will be available to download for those wishing to follow step-by-step. The information itself will be applicable whether you use the sprites or not.
+I will be using Gameboy-inspired graphics drawn by [TheRetroDragon](https://theretrodragon.itch.io/). All assets will be available to download for those wishing to follow step-by-step. The information itself will be applicable whether you use the sprites or not.
 
 This first tutorial will cover basic 8-direction character movement with a 2D top-down perspective. It will also have basic animation for walking. We'll be putting everything in a single script today and move things around as the project grows.
 
@@ -40,7 +40,7 @@ Add a *CollisionShape2D* as a child node. Give it a *CapsuleShape2D* resource an
 
 The last node we'll add is an *AnimatedSprite2D*. Expand the *Animation* tab in the inspector and give it a new *SpriteFrames* resource.
 
-Download this image and save it as "res://player/player.png". All of the art in this series is credited to [TheRetroDragon](https://theretrodragon.itch.io/). Huge thanks to him for letting me host the image here.
+Download this image and save it as "res://player/player.png".
 
 ![Player sprite sheet](/_images/zelda-like-1_player_spritesheet.png "Player sprite sheet")
 
@@ -218,4 +218,4 @@ func _get_sprite_direction():
 	return sprite_direction
 ```
 
-Thanks so much for reading! Coming soon will be enemies, items, tiles, camera scrolling, heart UI, and more. If you need any further assistance, feel free to reach out on Discord. If you found this helpful, leave a tip on my Ko-fi page. See you soon!
+Thanks so much for reading! Coming soon will be enemies, items, tiles, camera scrolling, heart UI, and more. If you need any further assistance, feel free to reach out on [Discord](http://discord.gg/Uwh5Cu4n9u). If you found this helpful, leave a tip on my [Ko-fi](https://ko-fi.com/fornclake) page. See you soon!
