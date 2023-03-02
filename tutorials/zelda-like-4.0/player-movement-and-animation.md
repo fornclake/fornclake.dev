@@ -170,7 +170,7 @@ func _physics_process(_delta):
 
 ## Conclusion
 
-Here is the full "player.gd" script:
+That's all we're going to do for this one. Here is the full "player.gd" script:
 
 ```gdscript
 extends CharacterBody2D
@@ -218,3 +218,4 @@ func _get_sprite_direction():
 	return sprite_direction
 ```
 
+Thanks so much for reading! Coming soon will be enemies, items, tiles, camera scrolling, heart UI, and more. If you need any further assistance, feel free to reach out on Discord. If you found this helpful, leave a tip on my Ko-fi page. See you soon!
