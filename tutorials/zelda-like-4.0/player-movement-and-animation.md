@@ -4,6 +4,14 @@ category: Zelda-like 4.0
 ---
 ## Introduction
 
+Hello! This is the first installment of my Zelda-like tutorial series for Godot Engine v4.0. I will be explaining how to create a Zelda game from scratch. I recommend following if you have at least some familiarity with programming and you're interested in learning Godot 4.0.
+
+There will be a mix of standalone tutorials that cover single features and multiple-part tutorials for larger features. All installments will be released first as written guides, then uploaded as videos to my YouTube channel shortly after.
+
+I will be using Gameboy-inspired graphics drawn by TheRetroDragon. All assets will be available to download for those wishing to follow step-by-step. The information itself will be applicable whether you use the sprites or not.
+
+This first tutorial will cover basic 8-direction character movement with a 2D top-down perspective. It will also have basic animation for walking. We'll be putting everything in a single script today and move things around as the project grows.
+
 #### Project Setup
 
 First let's do some quick project setup. Since we'll be using 2D pixel art, we need to turn off the linear filtering on sprites. Set *General>Rendering>Textures>Canvas Textures>Default Texture Filter* from "Linear" to "Nearest".
