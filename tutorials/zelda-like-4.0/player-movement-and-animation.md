@@ -6,7 +6,7 @@ category: Zelda-like 4.0
 
 Hello! This is the first installment of my Zelda-like tutorial series for Godot Engine v4.0. I will be explaining how to create a Zelda game from scratch. I recommend following if you have at least some familiarity with programming and you're interested in learning Godot 4.0.
 
-![Zelda](/_images/zelda-like-1_zelda.png "Zelda")
+![Example](/_images/zelda-like-1_example.png "Example")
 
 There will be a mix of standalone tutorials that cover single features and multiple-part tutorials for larger features. All installments will be released first as written guides, then uploaded as videos to my YouTube channel shortly after.
 
