@@ -4,6 +4,8 @@ category: Zelda-like 4.0
 ---
 ## Introduction
 
+[Zelda-like Tutorial for Godot 4.0 - Player Movement and Animation - YouTube](https://www.youtube.com/watch?v=Gp_98cuqXUY)
+
 Hello! This is the first installment of my Zelda-like tutorial series for Godot Engine v4.0. I will be explaining how to create a Zelda game from scratch. I recommend following if you have at least some familiarity with programming and you're interested in learning Godot 4.0.
 
 ![Example](/_images/zelda-like-1_example.png "Example")
